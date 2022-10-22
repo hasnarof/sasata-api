@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\API\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\utils\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 //API route for login user
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::prefix('product')->group(function () {
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/{id}', [ProductController::class, 'show']);
+    Route::post('/', [ProductController::class, 'store']);
+});
+
+Route::prefix('utilities')->group(function () {
+    Route::post('upload_image', [FileController::class, 'storeImage'])->middleware('auth:sanctum');
+});
 
 //Protecting Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {

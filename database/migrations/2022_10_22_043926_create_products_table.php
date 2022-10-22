@@ -18,14 +18,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('price');
-            $table->unsignedBigInteger('category');
-            $table->unsignedBigInteger('seller');
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('seller_id');
             $table->enum('condition', ['Baru', 'Jarang dipakai', 'Sering dipakai, rusak minor', 'Sering dipakai, rusak mayor']);
             $table->enum('status', ['available', 'sold out']);
             $table->boolean('is_cod');
             $table->string('address')->nullable();
-            $table->string('province')->nullable();
-            $table->string('city')->nullable();
+            $table->string('province_id')->nullable();
+            $table->string('city_id')->nullable();
             $table->timestamps();
         });
     }
